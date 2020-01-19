@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="goodee.three.board.mapper.CommentMapper">
+	
+	<delete id="deleteAll" parameterType="int">
+		delete from comment
+		where board_no=#{boardNo}
+	</delete>
+	
+	<delete id="deleteComment" parameterType="goodee.three.board.vo.Comment">
+		delete from comment 
+		where comment_no=#{commentNo} and comment_pw=#{commentPw}
+	</delete>
+	
+	<select id="getCommentList" resultType="goodee.three.board.vo.Comment" parameterType="int">
+		select 
+			comment_no as commentNo,
+			comment_content as commentContent,
+			comment_user as commentUser
+		from comment
+		where board_no =#{boardNo};
+	</select>
+	
+	<insert id="insertComment" parameterType="goodee.three.board.vo.Comment">
+		insert into comment(
+				board_no,
+				comment_pw,
+				comment_content,
+				comment_user
+			)values(
+				#{boardNo},
+				#{commentPw},
+				#{commentContent},
+				#{commentUser}
+			)
+	</insert>
+</mapper>

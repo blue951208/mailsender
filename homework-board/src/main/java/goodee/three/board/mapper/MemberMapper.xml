@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="goodee.three.board.mapper.MemberMapper">
+	<select id="selectMemberOne" resultType="goodee.three.board.vo.Member" parameterType="goodee.three.board.vo.LoginForm">
+		select 
+			member_no as memberNo,
+			member_id as memberId,
+			member_name as memberName,
+			member_pw as memberPw
+		from member
+		where member_id = #{memberId}
+		and
+		member_pw= #{memberPw}
+	</select>
+	
+	<insert id="insertMember" parameterType="goodee.three.board.vo.Member">
+		insert into member(
+			member_id,
+			member_pw,
+			member_name
+			)values(
+			#{memberId},
+			#{memberPw},
+			#{memberName}
+			)
+	</insert>
+	
+	<delete id="deleteMember" parameterType="int">
+		delete from member
+		where member_no=#{memberNo}
+	</delete>
+</mapper>

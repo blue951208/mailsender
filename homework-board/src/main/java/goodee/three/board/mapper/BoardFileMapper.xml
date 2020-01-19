@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="goodee.three.board.mapper.BoardFileMapper">
+	<update id="updateBoardFileOne" parameterType="goodee.three.board.vo.BoardFile">
+		update boardfile 
+			set 
+				filename=#{fileName},
+				extension=#{extension},
+				content_type=#{contentType},
+				size=#{size},
+				origin_name=#{originName}
+		where board_no=#{boardNo}
+	</update>
+	
+	<select id="selectBoardFileOne" parameterType="int" resultType="goodee.three.board.vo.BoardFile">
+		select 
+			filename as fileName,
+			extension as extension,
+			origin_name as originName
+		from boardfile
+		where board_no=#{boardNo}
+	</select>
+	
+	<delete id="deleteBoardFile" parameterType="int">
+		delete from boardfile
+		where board_no=#{boardNo}
+	</delete>
+	
+	<insert id="insertBoardFile" parameterType="goodee.three.board.vo.BoardFile">
+		insert into boardfile(
+			board_no,
+			filename,
+			extension,
+			content_type,
+			size,
+			origin_name
+			)values(
+			#{boardNo},
+			#{fileName},
+			#{extension},
+			#{contentType},
+			#{size},
+			#{originName}
+			)
+	</insert>
+
+</mapper>
